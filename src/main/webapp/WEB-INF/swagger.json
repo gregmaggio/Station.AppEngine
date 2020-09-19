@@ -1,0 +1,157 @@
+{
+	"swagger" : "2.0",
+	"info" : {
+		"description" : "Station API",
+		"version" : "1.0",
+		"title" : "Station Service",
+		"license" : {
+			"name" : "Apache License Version 2.0"
+		}
+	},
+	"host" : "{{host}}",
+	"basePath" : "",
+	"tags" : [{
+			"name" : "station-controller",
+			"description" : "Station Controller"
+		}
+	],
+	"paths" : {
+		"/api/list" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "List",
+				"operationId" : "list",
+				"consumes" : ["application/json"],
+				"produces" : ["application/json"],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"type" : "array",
+							"items" : {
+								"$ref" : "#/definitions/StationDTO"
+							}
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/{id}" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "Read By Identifier",
+				"operationId" : "readById",
+				"consumes" : ["application/json"],
+				"produces" : ["application/json"],
+				"parameters" : [{
+						"name" : "id",
+						"in" : "path",
+						"description" : "id",
+						"required" : true,
+						"type" : "string"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"$ref" : "#/definitions/StationDTO"
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/{latitude}/{longitude}/coordinates" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "Read By Location",
+				"operationId" : "readByLocation",
+				"consumes" : ["application/json"],
+				"produces" : ["application/json"],
+				"parameters" : [{
+						"name" : "latitude",
+						"in" : "path",
+						"description" : "latitude",
+						"required" : true,
+						"type" : "double"
+					},{
+						"name" : "longitude",
+						"in" : "path",
+						"description" : "longitude",
+						"required" : true,
+						"type" : "double"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"$ref" : "#/definitions/StationDTO"
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		}
+	},
+	"definitions" : {
+		"StationDTO" : {
+			"type" : "object",
+			"properties" : {
+				"stationId" : {
+					"type" : "string"
+				},
+				"stationName" : {
+					"type" : "string"
+				},
+				"state" : {
+					"type" : "string"
+				},
+				"wfo" : {
+					"type" : "string"
+				},
+				"radar" : {
+					"type" : "string"
+				},
+				"timeZoneId" : {
+					"type" : "string"
+				},
+				"latitude" : {
+					"type" : "number",
+					"format" : "double"
+				},
+				"longitude" : {
+					"type" : "number",
+					"format" : "double"
+				}				
+			}
+		}
+	}
+}
+
